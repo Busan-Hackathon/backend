@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,26 +13,26 @@
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src="images/Logo.png" style="height: 4rem;">
+                  <img th:src="@{/images/Logo.png}" style="height: 4rem;">
                 </a>
             </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
               <li><a th:hrf="@{/home}" class="nav-link px-2">메인</a></li>
-              <li><a th:hrf="@{/ranking}" class="nav-link px-2">후원 및 봉사 순위</a></li>
-              <li><a th:hrf="@{/usehistory}" class="nav-link px-2 link-secondary">후원금 사용내역</a></li>
-              <li><a th:hrf="@{/patronage}" class="nav-link px-2">후원하기</a></li>
-              <li><a th:hrf="@{/service}" class="nav-link px-2">봉사하기</a></li>
-              <li><a th:hrf="@{/event}" class="nav-link px-2">이벤트</a></li>
-              <li><a th:hrf="@{/announcement}" class="nav-link px-2">공지사항</a></li>
-            </ul>
-            <div class="col-md-3 text-end">
+              <li><a th:hrf="@{/post/ranking}" class="nav-link px-2">후원 및 봉사 순위</a></li>
+              <li><a th:hrf="@{/post/usehistory}" class="nav-link px-2">후원금 사용내역</a></li>
+              <li><a th:hrf="@{/post/donation}" class="nav-link px-2">후원하기</a></li>
+              <li><a th:hrf="@{/post/service}" class="nav-link px-2">봉사하기</a></li>
+              <li><a th:hrf="@{/post/event}" class="nav-link px-2">이벤트</a></li>
+              <li><a th:hrf="@{/post/announce}" class="nav-link px-2">공지사항</a></li>
+          </ul>
+          <div class="col-md-3 text-end">
               <form th:action="@{/login}" method="get" style="display: inline;">
                   <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
               </form>
               <form th:action="@{/signup}" method="get" style="display: inline;">
                   <button type="submit" class="btn btn-primary">회원가입</button>
               </form>
-            </div>
+          </div>
             </header>
         </div>
     </div>
@@ -43,7 +43,7 @@
               <h1 class="fw-light" style="color: white;">오직 부산의 발전을 위해</h1>
               <p style="color: white;">도티앤베니는 후원 받은 금액을 개인적인 용도로 사용하지 않습니다. <br> 도움이 필요한 분들께 전액 후원합니다.</p>
               <p>
-                <a href="patronage" class="btn btn-primary my-2">후원하기</a>
+                <a th:hrf="@{/post/donation}" class="btn btn-primary my-2">후원하기</a>
               </p>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2033년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -68,7 +68,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2032년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -82,7 +82,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2031년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -97,7 +97,7 @@
       
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2030년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -111,7 +111,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2029년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -125,7 +125,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2028년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -140,7 +140,7 @@
       
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2027년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -154,7 +154,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2026년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -168,7 +168,7 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/bill.png" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <img th:src="@{/images/bill.png}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <div class="card-body">
                       <p class="card-text">2025년 연간 기부금 모금액 및 활용실적 명세서</p>
                       <div class="d-flex justify-content-between align-items-center">
@@ -188,7 +188,7 @@
     <footer>
         <div class="col">
             <div class="card shadow-sm">
-            <img src="images/ad.jpeg" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <img th:src="@{/images/ad.jpeg}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
             </div>
         </div>
     </footer>

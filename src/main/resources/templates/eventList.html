@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                        <img src="images/Logo.png" style="height: 4rem;">
+                        <img th:src="@{/images/Logo.png}" style="height: 4rem;">
                     </a>
                 </div>
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -40,13 +40,13 @@
     <!-- 카테고리 배지 -->
     <div class="d-flex gap-3 justify-content-center">
         <span class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
-            <img class="rounded-circle me-1" width="24" height="24" src="images/earth.png" alt="">전체
+            <img class="rounded-circle me-1" width="24" height="24" th:src="@{/images/earth.png}" alt="">전체
         </span>
         <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill">
-            <img class="rounded-circle me-1" width="24" height="24" src="images/children.png" alt="">소상공인
+            <img class="rounded-circle me-1" width="24" height="24" th:src="@{/images/woman.png}" alt=""> 소상공인
         </span>
         <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill">
-            <img class="rounded-circle me-1" width="24" height="24" src="images/old-people.png" alt="">기업
+            <img class="rounded-circle me-1" width="24" height="24" th:src="@{/images/old-people.png}" alt=""> 기업
         </span>
     </div>
 
@@ -55,7 +55,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_1.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_6.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>부산김밥</strong> – 매출의 5% 기부</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -67,7 +67,7 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_2.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_5.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>광안리카페</strong> – 판매 수익 일부 기부 이벤트</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -79,7 +79,7 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_3.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_4.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>해운대횟집</strong> – 취약계층 무료 식사 제공 행사</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -96,7 +96,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_1.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_3.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>부산빵집</strong> – 지역 빵 나눔 행사</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -108,7 +108,7 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_2.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_2.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>자갈치시장 상인회</strong> – 지역사회 환원 기부</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -120,7 +120,7 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_3.jpg" class="bd-placeholder-img card-img-top">
+                    <img th:src="@{/images/donation_1.jpg}" class="bd-placeholder-img card-img-top">
                     <div class="card-body">
                         <p class="card-text"><strong>부산야시장</strong> – 야시장 수익금 일부 기부</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -137,7 +137,7 @@
     <footer>
         <div class="col">
             <div class="card shadow-sm">
-                <img src="images/ad.jpeg" class="bd-placeholder-img card-img-top">
+                <img th:src="@{/images/ad.jpeg}" class="bd-placeholder-img card-img-top">
             </div>
         </div>
     </footer>

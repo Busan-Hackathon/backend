@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src="images/Logo.png" style="height: 4rem;">
+                  <img th:src="@{/images/Logo.png}" style="height: 4rem;">
                 </a>
             </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -44,21 +44,21 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images/1.jpg" class="d-block w-100" alt="...">
+            <img th:src="@{/images/1.jpg}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>독거 노인 후원</h5>
               <p>생계가 어려운 독거 노인분들께 후원을 했습니다.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/2.jpg" class="d-block w-100" alt="...">
+            <img th:src="@{/images/2.jpg}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>독거 노인 봉사</h5>
               <p>가족이 없어 외로운 노인분들을 찾아가 도와드리는 봉사를 했습니다.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/3.jpg" class="d-block w-100" alt="...">
+            <img th:src="@{/images/3.jpg}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>다문화 아동 후원</h5>
               <p>생계가 어려운 다문화 가정의 아이에게 후원을 했습니다.</p>
@@ -89,7 +89,7 @@
                 <li>4.</li>
                 <li>5.</li>
               </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="location.href='ranking'">더보기</button>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" th:onclick="|location.href='@{post/ranking}'|">더보기</button>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@
                 <li>4.</li>
                 <li>5.</li>
               </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="location.href='ranking'">더보기</button>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" th:onclick="|location.href='@{post/ranking}'|">더보기</button>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@
                 <li>4.</li>
                 <li>5.</li>
               </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="location.href='ranking'">더보기</button>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" th:onclick="|location.href='@{post/ranking}'|">더보기</button>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="images/donation_1.jpg" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img th:src="@{/images/donation_1.jpg}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <div class="card-body">
                   <p class="card-text">취약계층의 아이들이 학원을 다닐 수 있도록 도와주세요.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -149,7 +149,7 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img src="images/donation_2.jpg" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img th:src="@{/images/donation_2.jpg}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <div class="card-body">
                   <p class="card-text">생계가 어려운 독거 노인들을 도와주세요.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -163,7 +163,7 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img src="images/donation_3.jpg" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img th:src="@{/images/donation_3.jpg}" class="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <div class="card-body">
                   <p class="card-text">버려진 유기견들을 도와주세요.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -181,7 +181,7 @@
         <footer>
             <div class="col">
                 <div class="card shadow-sm">
-                <img src="images/ad.jpeg" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img th:src="@{/images/ad.jpeg}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 </div>
             </div>
         </footer>

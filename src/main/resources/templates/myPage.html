@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +46,7 @@
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <img src="images/Logo.png" style="height: 4rem;">
+              <img th:src="@{/images/Logo.png}" style="height: 4rem;">
             </a>
           </div>
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -74,7 +74,7 @@
     <div class="container my-5">
     <!-- 프로필 정보 -->
 <div class="profile-container">
-    <img src="images/girl.jpg" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+    <img th:src="@{/images/girl.png}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
     <div>
         <h4 class="mb-3"><strong>테루하시 코코미</strong> 님의 후원 정보</h4>
         <p><strong>후원 기록:</strong> 12,345 포인트</p>
@@ -87,17 +87,17 @@
 <div class="mt-5">
     <div class="d-flex justify-content-between align-items-center">
         <h4>스크랩한 후원 & 봉사 ></h4>
-        <button type="button" class="btn btn-primary" onclick="openScrapPage('scrap_all.html')">전체보기</button>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{mypage/scrap}'|">전체보기</button>
     </div>
     <div class="container mt-3">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_1.jpg" class="card-img-top">
+                    <img th:src="@{/images/donation_1.jpg}" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">취약계층의 아이들이 학원을 다닐 수 있도록 도와주세요.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap1.html')">더보기</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
                             <small class="text-body-secondary">누적 후원 3,137,000원</small>
                         </div>
                     </div>
@@ -105,11 +105,11 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_2.jpg" class="card-img-top">
+                    <img th:src="@{/images/donation_2.jpg}" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">생계가 어려운 독거 노인들을 도와주세요.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap2.html')">더보기</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
                             <small class="text-body-secondary">누적 후원 1,202,000원</small>
                         </div>
                     </div>
@@ -117,11 +117,11 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="images/donation_3.jpg" class="card-img-top">
+                    <img th:src="@{/images/donation_3.jpg}" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">버려진 유기견들을 도와주세요.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap3.html')">더보기</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
                             <small class="text-body-secondary">누적 후원 841,000원</small>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
 <footer>
   <div class="col">
       <div class="card shadow-sm">
-      <img src="images/ad.jpeg" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img th:src="@{/images/ad.jpeg}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
       </div>
   </div>
 </footer>
