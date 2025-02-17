@@ -50,15 +50,26 @@ public class UserService {
     }
     public MyPageDto myPageDto(String email) {
         User user = findUser(email);
-        List<Post> scrapLists = scrapRepository.findByUser(user).
-                stream()
-                .map(Scrap::getPost)
+
+        List<Post> posts = scrapRepository.findByUser(user)
+                .stream()
+                .map(Scrap::getPost) // ✅ Scrap 객체에서 Post 객체만 추출
+                .collect(Collectors.toList()); // ✅ 리스트로 변환
+
+        List<PostListDto> postListDtos =  posts.stream().limit(3)
+                .map(post -> PostListDto.builder()
+                        .id(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent()) // context → content로 수정
+                        .author(post.getAuthor().getName()) // 🔥 User 객체에서 username 가져오기
+                        .build())
                 .collect(Collectors.toList());
 
         return MyPageDto.builder()
-                .username(user.getUsername())
+                .username(user.getName())
                 .introduce(user.getIntroduce())
-                .scrapList(scrapLists)
+                .point(user.getPoint())
+                .posts(postListDtos)
                 .build();
     }
     public MainDto mainPage(){
@@ -78,7 +89,8 @@ public class UserService {
         }
 
         List<Post> posts = postRepository.findByCategory(Category.donation)
-                .orElseThrow(() -> new RuntimeException("해당 카테고리에 대한 게시글이 없습니다."));
+                .orElseThrow(() -> new RuntimeException("해당 카테고리에 대한 게시글이 없습니다.")).stream().
+                sorted(Comparator.comparing(Post::getCreatedAt).reversed()).toList();
 
         List<PostListDto> postListDtos =  posts.stream().limit(3)
                 .map(post -> PostListDto.builder()

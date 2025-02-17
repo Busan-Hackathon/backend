@@ -24,7 +24,8 @@ public class UserController {
         if(user == null){
             return "redirect:/login";
         }
-        model.addAttribute("mypage", user);
+
+        model.addAttribute("myPage", user);
         return "myPage";
     }
 }

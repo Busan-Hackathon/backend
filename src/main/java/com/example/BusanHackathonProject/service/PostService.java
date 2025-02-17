@@ -46,6 +46,7 @@ public class PostService {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .category(post.getCategory().toString())
                 .date(post.getCreatedAt().toString())
                 .author(post.getAuthor().getName())
                 .build();

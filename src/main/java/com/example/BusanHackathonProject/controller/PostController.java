@@ -8,6 +8,7 @@ import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.dto.rankingDto.RankingDto;
 import com.example.BusanHackathonProject.service.PostService;
+import com.example.BusanHackathonProject.service.ScrapService;
 import com.example.BusanHackathonProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,8 @@ public class PostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final ScrapService scrapService;
+
     @GetMapping("/")
     public String showForm(Model model){
 
@@ -61,6 +64,18 @@ public class PostController {
         List<PostListDto> postList = postService.postListDonation();
         model.addAttribute("donationPost", postList);
         return "donationList";
+    }
+    @GetMapping("/donation/help/{id}")
+    public String donationPost(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model){
+        User user = userService.findUser(userDetails.getUsername());
+        scrapService.addScrap(user.getId(),id);
+        PostDetailDto post = postService.detailPost(id);
+        model.addAttribute("postDetail", post);
+        return "postDetail";
+
     }
 //    @GetMapping("/usehistory")
 //    public String getHistoryList(@ModelAttribute PostListRequest postListRequest, Model model){

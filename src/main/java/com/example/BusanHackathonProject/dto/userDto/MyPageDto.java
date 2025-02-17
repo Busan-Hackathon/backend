@@ -1,6 +1,7 @@
 package com.example.BusanHackathonProject.dto.userDto;
 
 import com.example.BusanHackathonProject.domain.Post;
+import com.example.BusanHackathonProject.dto.postDto.PostListDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,6 @@ import java.util.List;
 public class MyPageDto {
     private String username;
     private String introduce;
-    private List<Post> scrapList;
-
+    private List<PostListDto> posts;
+    private Integer point;
 }

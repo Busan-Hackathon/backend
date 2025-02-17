@@ -20,6 +20,11 @@
         <div class="post-content">
             <p th:text="${postDetail.content}">게시물 내용</p>
         </div>
+        <a th:if="${postDetail.category == 'donation'}"
+           th:href="@{/post/donation/help/{id}(id=${postDetail.id})}"
+           class="btn btn-success mt-3">
+            도움주기
+        </a>
 
         <a href="/post/announce" class="btn btn-primary btn-back mt-3">목록으로 돌아가기</a>
     </div>

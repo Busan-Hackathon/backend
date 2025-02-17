@@ -1,5 +1,6 @@
 <!-- header.html (공통 헤더) -->
-<header th:fragment="header">
+<header th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/experiments">
     <div style="background-color: #e3f2fd;">
         <div class="container">
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -14,18 +15,38 @@
                     <li><a th:href="@{/post/donation}" class="nav-link px-2">후원하기</a></li>
                     <li><a th:href="@{/post/announce}" class="nav-link px-2">공지사항</a></li>
                 </ul>
-                <div class="col-md-3 text-end">
-                    <!-- 🔥 게시물 등록 모달 버튼 -->
-                    <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#postModal">
-                        게시물 등록하기
-                    </button>
 
-                    <form th:action="@{/login}" method="get" style="display: inline;">
-                        <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
-                    </form>
-                    <form th:action="@{/signup}" method="get" style="display: inline;">
-                        <button type="submit" class="btn btn-primary">회원가입</button>
-                    </form>
+                <!-- ✅ 로그인 여부에 따라 버튼 표시 -->
+                <div class="col-md-3 text-end">
+                    <!-- 🔥 비로그인 상태 (익명) -->
+                    <th:block sec:authorize="isAnonymous()">
+                        <!-- 게시물 등록하기 버튼 미표시 -->
+
+                        <!-- 로그인 버튼 -->
+                        <form th:action="@{/login}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
+                        </form>
+                        <!-- 회원가입 버튼 -->
+                        <form th:action="@{/signup}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-primary">회원가입</button>
+                        </form>
+                    </th:block>
+
+                    <!-- 🔥 로그인 상태 (인증) -->
+                    <th:block sec:authorize="isAuthenticated()">
+                        <!-- 게시물 등록하기 모달 버튼 -->
+                        <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#postModal">
+                            게시물 등록하기
+                        </button>
+
+                        <!-- 마이페이지 -->
+                        <a th:href="@{/mypage}" class="btn btn-success me-2">마이페이지</a>
+
+                        <!-- 로그아웃 버튼 -->
+                        <form th:action="@{/logout}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">로그아웃</button>
+                        </form>
+                    </th:block>
                 </div>
             </header>
         </div>

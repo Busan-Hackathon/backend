@@ -41,34 +41,7 @@
   <body>
 
     <!-- 헤더 -->
-    <div style="background-color: #e3f2fd;">
-      <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-          <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <img th:src="@{/images/Logo.png}" style="height: 4rem;">
-            </a>
-          </div>
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="@{/home}" class="nav-link px-2">메인</a></li>
-            <li><a th:href="@{/post/ranking}" class="nav-link px-2">후원 및 봉사 순위</a></li>
-            <li><a th:href="@{/post/usehistory}" class="nav-link px-2">후원금 사용내역</a></li>
-            <li><a th:href="@{/post/donation}" class="nav-link px-2">후원하기</a></li>
-            <li><a th:href="@{/post/service}" class="nav-link px-2">봉사하기</a></li>
-            <li><a th:href="@{/post/event}" class="nav-link px-2">이벤트</a></li>
-            <li><a th:href="@{/post/announce}" class="nav-link px-2">공지사항</a></li>
-        </ul>
-        <div class="col-md-3 text-end">
-            <form th:action="@{/login}" method="get" style="display: inline;">
-                <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
-            </form>
-            <form th:action="@{/signup}" method="get" style="display: inline;">
-                <button type="submit" class="btn btn-primary">회원가입</button>
-            </form>
-        </div>
-        </header>
-      </div>
-    </div>
+    <div th:replace="fragments/header :: header"></div>
 
     <!-- 마이페이지 컨테이너 -->
     <div class="container my-5">
@@ -76,59 +49,40 @@
 <div class="profile-container">
     <img th:src="@{/images/girl.png}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
     <div>
-        <h4 class="mb-3"><strong>테루하시 코코미</strong> 님의 후원 정보</h4>
-        <p><strong>후원 기록:</strong> 12,345 포인트</p>
+        <h4 class="mb-3"><strong>"<span th:text="${myPage.username}"></span>"</strong> 님의 후원 정보</h4>
+        <h4 class="mb-3"><strong>후원 기록 : "<span th:text="${myPage.point}"></span>"</strong> 포인트</h4>
         <p><strong>후원 레벨:</strong> 🌱 새싹</p>
-        <p><strong>후원 순위:</strong> 12 / 30 (봉사/금액)</p>
+        <h4 class="mb-3"><strong>소개 : "<span th:text="${myPage.introduce}"></span>"</strong></h4>
     </div>
 </div>
 
       <!-- 스크랩한 후원 & 봉사 -->
 <div class="mt-5">
     <div class="d-flex justify-content-between align-items-center">
-        <h4>스크랩한 후원 & 봉사 ></h4>
+        <h4>승인 대기 게시물</h4>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{mypage/scrap}'|">전체보기</button>
     </div>
-    <div class="container mt-3">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img th:src="@{/images/donation_1.jpg}" class="card-img-top">
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- ✅ 한 줄이 가득 차면 자동으로 아래로 정렬됨 -->
+            <div class="col" th:each="post : ${myPage.posts}">
+                <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <p class="card-text">취약계층의 아이들이 학원을 다닐 수 있도록 도와주세요.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
-                            <small class="text-body-secondary">누적 후원 3,137,000원</small>
-                        </div>
+                        <h5 class="card-title" th:text="${post.title}">제목</h5>
+                        <p class="card-text text-truncate"
+                           th:text="${#strings.length(post.content) > 50 ? #strings.substring(post.content, 0, 50) + '...' : post.content}">
+                        </p>
+                        <p class="text-muted">작성자: <span th:text="${post.author}"></span></p>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img th:src="@{/images/donation_2.jpg}" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">생계가 어려운 독거 노인들을 도와주세요.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
-                            <small class="text-body-secondary">누적 후원 1,202,000원</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img th:src="@{/images/donation_3.jpg}" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">버려진 유기견들을 도와주세요.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-primary" th:onclick="|location.href='@{mypage/scrap}'|">더보기</button>
-                            <small class="text-body-secondary">누적 후원 841,000원</small>
-                        </div>
+                    <div class="card-footer text-end">
+                        <!-- 🔥 ID를 URL에 포함하여 상세 페이지로 이동 -->
+                        <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-sm btn-primary">자세히 보기</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
+
 </div>
 
 <script>
