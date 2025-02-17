@@ -17,17 +17,21 @@
                 </a>
             </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="home" class="nav-link px-2 link-secondary">메인</a></li>
-                <li><a href="ranking" class="nav-link px-2">후원 및 봉사 순위</a></li>
-                <li><a href="usehistory" class="nav-link px-2">후원금 사용내역</a></li>
-                <li><a href="patronage" class="nav-link px-2">후원하기</a></li>
-                <li><a href="service" class="nav-link px-2">봉사하기</a></li>
-                <li><a href="event" class="nav-link px-2">이벤트</a></li>
-                <li><a href="announcement" class="nav-link px-2">공지사항</a></li>
+              <li><a th:hrf="@{/home}" class="nav-link px-2 link-secondary">메인</a></li>
+              <li><a th:hrf="@{/ranking}" class="nav-link px-2">후원 및 봉사 순위</a></li>
+              <li><a th:hrf="@{/usehistory}" class="nav-link px-2">후원금 사용내역</a></li>
+              <li><a th:hrf="@{/patronage}" class="nav-link px-2">후원하기</a></li>
+              <li><a th:hrf="@{/service}" class="nav-link px-2">봉사하기</a></li>
+              <li><a th:hrf="@{/event}" class="nav-link px-2">이벤트</a></li>
+              <li><a th:hrf="@{/announcement}" class="nav-link px-2">공지사항</a></li>
             </ul>
             <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='login'">로그인</button>
-                <button type="button" class="btn btn-primary" onclick="location.href='signup'">회원가입</button>
+              <form th:action="@{/login}" method="get" style="display: inline;">
+                  <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
+              </form>
+              <form th:action="@{/signup}" method="get" style="display: inline;">
+                  <button type="submit" class="btn btn-primary">회원가입</button>
+              </form>
             </div>
             </header>
         </div>
