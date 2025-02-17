@@ -31,10 +31,10 @@ public class Post extends BaseEntity{
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer targetMoney;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer currentMoney;
 
 

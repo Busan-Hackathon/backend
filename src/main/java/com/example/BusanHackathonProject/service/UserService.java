@@ -1,13 +1,20 @@
 package com.example.BusanHackathonProject.service;
 
 
+import com.example.BusanHackathonProject.domain.Post;
+import com.example.BusanHackathonProject.domain.Scrap;
 import com.example.BusanHackathonProject.domain.User;
 import com.example.BusanHackathonProject.dto.AddUserRequest;
+import com.example.BusanHackathonProject.dto.userDto.MyPageDto;
+import com.example.BusanHackathonProject.repository.ScrapRepository;
 import com.example.BusanHackathonProject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +22,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ScrapRepository scrapRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Long save(AddUserRequest dto){
@@ -27,4 +35,24 @@ public class UserService {
                 .role(dto.getRole())
                 .build()).getId();
     }
+    public User findUser(String email){
+        User user  = userRepository.findByEmail(email).orElseThrow();
+        return user;
+    }
+    public MyPageDto myPageDto(String email) {
+        User user = findUser(email);
+        List<Post> scrapLists = scrapRepository.findByUser(user).
+                stream()
+                .map(Scrap::getPost)
+                .collect(Collectors.toList());
+
+        return MyPageDto.builder()
+                .username(user.getUsername())
+                .introduce(user.getIntroduce())
+                .scrapList(scrapLists)
+                .build();
+    }
+
+
+
 }

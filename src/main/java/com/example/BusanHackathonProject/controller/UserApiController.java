@@ -22,8 +22,9 @@ public class UserApiController {
         userService.save(request);
         return "redirect:/login";
     }
-    @GetMapping("home")
+    @GetMapping("/home")
     public String mainPage(){
+        log.info("메인페이지 이동!!");
         return "home";
     }
 }
