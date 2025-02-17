@@ -26,6 +26,9 @@ public class Post extends BaseEntity{
     private String title;
 
     @Column(nullable = false)
+    private Category category;
+
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)

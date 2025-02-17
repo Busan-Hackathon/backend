@@ -32,13 +32,18 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .sessionManagement(session -> session
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                        .expiredUrl("/login?expired"))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("admin/**").hasRole("ADMIN")
                         .requestMatchers("/login", "/signup", "/user","/post/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/main", true) // 🔥 강제 이동 (alwaysUse=true)
+                        .defaultSuccessUrl("/home", true) // 🔥 강제 이동 (alwaysUse=true)
                         .permitAll()
                 )
                 .logout(logout -> logout

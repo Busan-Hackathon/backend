@@ -23,7 +23,7 @@ public class UserService {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
-                .role("USER")
+                .role(dto.getRole())
                 .build()).getId();
     }
 }
