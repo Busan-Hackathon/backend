@@ -21,9 +21,22 @@ public class Post extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column()
+
+    @Column(nullable = false)
     private String title;
-    @Column()
+
+    @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "money_id")
+    private Money donationMoney;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "money_id")
+    private Money currentMoney;
+
 
 }
