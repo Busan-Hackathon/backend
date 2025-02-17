@@ -29,11 +29,13 @@ public class Post extends BaseEntity{
     private String content;
 
     @Column(nullable = false)
-    private int donationMoney;
+    private Integer targetMoney;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "money_id")
-    private Money currentMoney;
+    @Column(nullable = false)
+    private Integer currentMoney;
+
+
+
 
 
 }
