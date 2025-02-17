@@ -39,7 +39,9 @@
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${post.title}">제목</h5>
-                        <p class="card-text text-truncate" th:text="${post.content}" style="max-height: 50px; overflow: hidden;">내용</p>
+                        <p class="card-text text-truncate"
+                           th:text="${#strings.length(post.content) > 50 ? #strings.substring(post.content, 0, 50) + '...' : post.content}">
+                        </p>
                         <p class="text-muted">작성자: <span th:text="${post.author}"></span></p>
                     </div>
                     <div class="card-footer text-end">

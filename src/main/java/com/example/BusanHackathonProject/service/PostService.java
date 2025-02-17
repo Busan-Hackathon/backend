@@ -96,7 +96,7 @@ public class PostService {
                         .id(post.getId())
                         .title(post.getTitle())
                         .content(post.getContent()) // context → content로 수정
-                        .author(post.getAuthor().getUsername()) // 🔥 User 객체에서 username 가져오기
+                        .author(post.getAuthor().getName()) // 🔥 User 객체에서 username 가져오기
                         .build())
                 .collect(Collectors.toList());
     }
@@ -109,7 +109,7 @@ public class PostService {
                         .id(post.getId())
                         .title(post.getTitle())
                         .content(post.getContent()) // context → content로 수정
-                        .author(post.getAuthor().getUsername()) // 🔥 User 객체에서 username 가져오기
+                        .author(post.getAuthor().getName()) // 🔥 User 객체에서 username 가져오기
                         .build())
                 .collect(Collectors.toList());
     }
