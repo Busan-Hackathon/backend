@@ -24,8 +24,7 @@ public class Post extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne
     private User author;
 
     @Column(nullable = false)

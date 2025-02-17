@@ -1,5 +1,6 @@
 package com.example.BusanHackathonProject.dto.postDto;
 
+import com.example.BusanHackathonProject.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class PostDetailDto {
+public class PostListDto {
     private Long id;
     private String title;
     private String content;
     private String author;
-    private String date;
+
 }

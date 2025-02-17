@@ -8,47 +8,48 @@
 </head>
 <body>
 
+<!-- 공통 헤더 -->
 <div th:replace="fragments/header :: header"></div>
+
 <!-- 공지사항 타이틀 -->
-<div class="text-center" >
+<div class="text-center mt-4">
     <h1>공지사항</h1>
 </div>
 
 <div class="container mt-4">
     <!-- 검색 및 필터 -->
-    <div class="filter-search">
-        <select class="form-select">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <select class="form-select w-25">
             <option selected>전체</option>
             <option>공지</option>
             <option>이벤트</option>
             <option>모집</option>
         </select>
-        <div class="input-group">
+        <div class="input-group w-50">
             <input type="text" class="form-control" placeholder="검색">
             <button class="btn btn-outline-secondary" type="button">🔍</button>
         </div>
     </div>
 
-    <!-- 공지사항 리스트 -->
-    <div class="notice-table mt-3">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 10%;">분류</th>
-                    <th>제목</th>
-                    <th style="width: 15%;">날짜</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="post : ${post}">
-                    <td><span class="category-badge" th:text="${post.category}">공지</span></td>
-                    <td>
-                        <a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}" class="clickable">게시글 제목</a>
-                    </td>
-                    <td th:text="${post.date}">2025.01.22</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- 🔥 공지사항 블록 출력 (한 줄에 하나씩) -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- ✅ 한 줄이 가득 차면 자동으로 아래로 정렬됨 -->
+            <div class="col" th:each="post : ${announcePost}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${post.title}">제목</h5>
+                        <p class="card-text text-truncate" th:text="${post.content}" style="max-height: 50px; overflow: hidden;">내용</p>
+                        <p class="text-muted">작성자: <span th:text="${post.author}"></span></p>
+                    </div>
+                    <div class="card-footer text-end">
+                    <!-- 🔥 ID를 URL에 포함하여 상세 페이지로 이동 -->
+                    <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-sm btn-primary">자세히 보기</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

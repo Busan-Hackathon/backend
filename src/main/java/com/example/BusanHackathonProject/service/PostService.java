@@ -4,7 +4,7 @@ import com.example.BusanHackathonProject.domain.Category;
 import com.example.BusanHackathonProject.domain.Post;
 import com.example.BusanHackathonProject.domain.User;
 import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
-import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
+import com.example.BusanHackathonProject.dto.postDto.PostListDto;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.dto.rankingDto.CompanyRankingDto;
 import com.example.BusanHackathonProject.dto.rankingDto.RankingDto;
@@ -34,18 +34,21 @@ public class PostService {
                 .author(user)
                 .build();
 
-        if(postRequest.equals("donation"))
+        if(postRequest.getCategory().equals("donation"))
             post.setCategory(Category.donation);
-        if(postRequest.equals("announcement"))
+        if(postRequest.getCategory().equals("announcement"))
             post.setCategory(Category.announcement);
         postRepository.save(post);
         return post;
     }
     public PostDetailDto detailPost(Long id){
         Post post = postRepository.findById(id).orElseThrow();
+
         return PostDetailDto.builder()
+                .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .date(post.getCreatedAt().toString())
                 .author(post.getAuthor().getName())
                 .build();
 
@@ -84,11 +87,30 @@ public class PostService {
                 .serviceRankingList(serviceRankingList)
                 .build();
     }
-    public List<Post> postList(PostListRequest postListRequest){
-        List<Post> posts = postRepository.findByCategory(postListRequest.getCategory())
+    public List<PostListDto> postListDonation( ){
+        List<Post> posts = postRepository.findByCategory(Category.donation)
                 .orElseThrow(() -> new RuntimeException("해당 카테고리에 대한 게시글이 없습니다."));
 
-        return posts;
+        return posts.stream()
+                .map(post -> PostListDto.builder()
+                        .id(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent()) // context → content로 수정
+                        .author(post.getAuthor().getUsername()) // 🔥 User 객체에서 username 가져오기
+                        .build())
+                .collect(Collectors.toList());
+    }
+    public List<PostListDto> postListAnnounce( ){
+        List<Post> posts = postRepository.findByCategory(Category.announcement)
+                .orElseThrow(() -> new RuntimeException("해당 카테고리에 대한 게시글이 없습니다."));
 
+        return posts.stream()
+                .map(post -> PostListDto.builder()
+                        .id(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent()) // context → content로 수정
+                        .author(post.getAuthor().getUsername()) // 🔥 User 객체에서 username 가져오기
+                        .build())
+                .collect(Collectors.toList());
     }
 }

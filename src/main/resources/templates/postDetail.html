@@ -10,16 +10,15 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container mt-5">
     <div class="post-container p-4 bg-white rounded shadow">
-        <h1 class="post-title" th:text="${post.title}">게시물 제목</h1>
-        <p class="post-date">작성자: <span th:text="${post.author}">작성자</span></p>
-        <p class="post-date">작성일: <span th:text="${post.date}">2025.01.22</span></p>
+        <h1 class="post-title" th:text="${postDetail.title}">게시물 제목</h1>
+        <p class="post-date">작성자: <span th:text="${postDetail.author}">작성자</span></p>
+        <p class="post-date">작성일: <span th:text="${postDetail.date}">2025.01.22</span></p>
 
         <!-- 이미지 표시 -->
-        <img th:if="${post.image != null}" th:src="@{/images/{image}(image=${post.image})}" class="img-fluid my-3" alt="게시글 이미지">
 
         <!-- 본문 내용 -->
         <div class="post-content">
-            <p th:text="${post.content}">게시물 내용</p>
+            <p th:text="${postDetail.content}">게시물 내용</p>
         </div>
 
         <a href="/post/announce" class="btn btn-primary btn-back mt-3">목록으로 돌아가기</a>
