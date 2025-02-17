@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -38,6 +39,12 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String introduce;
     // ✅ 기본값 "USER" 설정
+
+    @Column(nullable = false)
+    private Integer donationMoney = 0;
+    @Column(nullable = false)
+    private Integer donationTime = 0;
+
     @Column(nullable = false)
     private String role = "USER";
 

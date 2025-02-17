@@ -4,6 +4,7 @@ import com.example.BusanHackathonProject.domain.Post;
 import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
 import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
+import com.example.BusanHackathonProject.dto.rankingDto.RankingDto;
 import com.example.BusanHackathonProject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,8 +44,8 @@ public class PostController {
 
     @GetMapping("/ranking")
     public String getRankingList(@ModelAttribute PostListRequest postListRequest, Model model){
-        List<Post> postList = postService.postList(postListRequest);
-        model.addAttribute("post", postList);
+        RankingDto postList = postService.rankingList();
+        model.addAttribute("companyRankingList", postList);
         return "rankingList";
     }
     @GetMapping("/donation")
