@@ -1,5 +1,6 @@
 package com.example.BusanHackathonProject.controller;
 
+import com.example.BusanHackathonProject.domain.Category;
 import com.example.BusanHackathonProject.domain.Post;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.service.PostService;
@@ -31,7 +32,7 @@ class PostControllerTest {
     @DisplayName("게시글 생성 - 성공")
     void createPostTest() throws Exception {
         PostRequest postRequest = new PostRequest("테스트 제목", "테스트 내용", 1243);
-        Post savedPost = new Post(1L, "테스트 제목", "테스트 내용", 1203, 0);
+        Post savedPost = new Post(1L, "테스트 제목", Category.donation, "테스트 내용", 1203, 0);
 
         when(postService.savePost(any(PostRequest.class))).thenReturn(savedPost);
 

@@ -19,7 +19,7 @@ public class UserViewController {
     public String signup(Model model){
         log.info("회원가입 폼 전달");
         model.addAttribute("member", new AddUserRequest());
-        return "signup";
+        return "signUp";
     }
 
 }

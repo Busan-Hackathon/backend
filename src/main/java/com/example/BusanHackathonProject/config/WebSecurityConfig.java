@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                         .expiredUrl("/login?expired"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("admin/**").hasRole("ADMIN")
-                        .requestMatchers("/login", "/signup", "/user","/post/**").permitAll()
+                        .requestMatchers("/login", "/signup", "/addUser","/post/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

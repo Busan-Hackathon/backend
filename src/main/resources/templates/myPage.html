@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Doti&Beni - 마이페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .profile-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.15);
+      }
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
+      }
+      .scrap-section img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- 헤더 -->
+    <div style="background-color: #e3f2fd;">
+      <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <img src="images/Logo.png" style="height: 4rem;">
+            </a>
+          </div>
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="home" class="nav-link px-2">메인</a></li>
+            <li><a href="ranking" class="nav-link px-2">후원 및 봉사 순위</a></li>
+            <li><a href="usehistory" class="nav-link px-2">후원금 사용내역</a></li>
+            <li><a href="patronage" class="nav-link px-2">후원하기</a></li>
+            <li><a href="service" class="nav-link px-2">봉사하기</a></li>
+            <li><a href="event" class="nav-link px-2">이벤트</a></li>
+            <li><a href="announcement" class="nav-link px-2">공지사항</a></li>
+          </ul>
+          <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+            <button type="button" class="btn btn-primary">회원가입</button>
+          </div>
+        </header>
+      </div>
+    </div>
+
+    <!-- 마이페이지 컨테이너 -->
+    <div class="container my-5">
+    <!-- 프로필 정보 -->
+<div class="profile-container">
+    <img src="images/girl.jpg" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+    <div>
+        <h4 class="mb-3"><strong>테루하시 코코미</strong> 님의 후원 정보</h4>
+        <p><strong>후원 기록:</strong> 12,345 포인트</p>
+        <p><strong>후원 레벨:</strong> 🌱 새싹</p>
+        <p><strong>후원 순위:</strong> 12 / 30 (봉사/금액)</p>
+    </div>
+</div>
+
+      <!-- 스크랩한 후원 & 봉사 -->
+<div class="mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>스크랩한 후원 & 봉사 ></h4>
+        <button type="button" class="btn btn-primary" onclick="openScrapPage('scrap_all.html')">전체보기</button>
+    </div>
+    <div class="container mt-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="images/donation_1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">취약계층의 아이들이 학원을 다닐 수 있도록 도와주세요.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap1.html')">더보기</button>
+                            <small class="text-body-secondary">누적 후원 3,137,000원</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="images/donation_2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">생계가 어려운 독거 노인들을 도와주세요.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap2.html')">더보기</button>
+                            <small class="text-body-secondary">누적 후원 1,202,000원</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="images/donation_3.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">버려진 유기견들을 도와주세요.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="openScrapPage('scrap3.html')">더보기</button>
+                            <small class="text-body-secondary">누적 후원 841,000원</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<script>
+    function openScrapPage(url) {
+        window.open(url, '_blank');
+    }
+</script>
+<br><br>
+<footer>
+  <div class="col">
+      <div class="card shadow-sm">
+      <img src="images/ad.jpeg" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+      </div>
+  </div>
+</footer>
+</body>
+</html>

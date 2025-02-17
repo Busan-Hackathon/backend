@@ -39,24 +39,29 @@ public class PostController {
         model.addAttribute("post", post);
         return "postDetail";
     }
+
     @GetMapping("/ranking")
-    public String getRankingList(@ModelAttribute PostListRequest postListRequest){
+    public String getRankingList(@ModelAttribute PostListRequest postListRequest, Model model){
         List<Post> postList = postService.postList(postListRequest);
+        model.addAttribute("post", postList);
         return "rankingList";
     }
     @GetMapping("/donation")
-    public String getDonationList(@ModelAttribute PostListRequest postListRequest){
+    public String getDonationList(@ModelAttribute PostListRequest postListRequest, Model model){
         List<Post> postList = postService.postList(postListRequest);
+        model.addAttribute("post", postList);
         return "donationList";
     }
    @GetMapping("/event")
-    public String getEventList(@ModelAttribute PostListRequest postListRequest){
+    public String getEventList(@ModelAttribute PostListRequest postListRequest, Model model){
         List<Post> postList = postService.postList(postListRequest);
+        model.addAttribute("post", postList);
         return "eventList";
    }
    @GetMapping("/announce")
-    public String getAnnounceList(@ModelAttribute PostListRequest postListRequest) {
+    public String getAnnounceList(@ModelAttribute PostListRequest postListRequest, Model model) {
        List<Post> postList = postService.postList(postListRequest);
+       model.addAttribute("post", postList);
        return "eventList";
    }
 }

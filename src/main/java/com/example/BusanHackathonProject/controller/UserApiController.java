@@ -16,14 +16,14 @@ public class UserApiController {
 
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/addUser")
     public String signup(@ModelAttribute("member") AddUserRequest request){
         log.info("요청 이메일: " + request.getEmail() + ", 비밀번호: " + request.getPassword());
         userService.save(request);
         return "redirect:/login";
     }
-    @GetMapping("main")
+    @GetMapping("home")
     public String mainPage(){
-        return "main";
+        return "home";
     }
 }

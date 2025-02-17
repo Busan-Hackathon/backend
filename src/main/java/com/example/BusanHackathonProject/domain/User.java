@@ -35,6 +35,8 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String introduce;
     // ✅ 기본값 "USER" 설정
     @Column(nullable = false)
     private String role = "USER";
