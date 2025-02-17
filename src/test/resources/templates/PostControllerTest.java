@@ -5,7 +5,6 @@ import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -60,7 +59,7 @@ public class PostControllerTest {
     public void getPostDetailTest() throws Exception {
         // 📌 Mock 데이터 설정
         Post post = new Post(1L, "제목", "내용", null, null);
-        when(postService.deatilPost(1L)).thenReturn(post);
+        when(postService.detailPost(1L)).thenReturn(post);
 
         // ✅ API 요청 및 응답 검증
         mockMvc.perform(MockMvcRequestBuilders.get("/post/1"))

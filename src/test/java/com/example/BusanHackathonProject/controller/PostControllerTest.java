@@ -6,7 +6,6 @@ import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -49,7 +48,7 @@ class PostControllerTest {
     @DisplayName("게시글 상세 조회 - 성공")
     void getPostDetailTest() throws Exception {
         Post post = new Post(1L, "테스트 제목", "테스트 내용", 123, 0);
-        when(postService.deatilPost(1L)).thenReturn(post);
+        when(postService.detailPost(1L)).thenReturn(post);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/post/1"))
                 .andExpect(status().isOk())

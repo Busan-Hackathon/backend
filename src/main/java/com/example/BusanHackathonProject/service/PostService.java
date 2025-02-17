@@ -1,7 +1,7 @@
 package com.example.BusanHackathonProject.service;
 
-import com.example.BusanHackathonProject.domain.Category;
 import com.example.BusanHackathonProject.domain.Post;
+import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
 import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.repository.PostRepository;
@@ -25,8 +25,17 @@ public class PostService {
         postRepository.save(post);
         return post;
     }
-    public Post deatilPost(Long id){
-        return postRepository.findById(id).orElseThrow();
+    public PostDetailDto detailPost(Long id){
+        Post post = postRepository.findById(id).orElseThrow();
+        return PostDetailDto.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor().getName())
+                .targetMoney(post.getTargetMoney())
+                .currentMoney(post.getCurrentMoney())
+                .build();
+
+
     }
     public List<Post> postList(PostListRequest postListRequest){
         List<Post> posts = postRepository.findByCategory(postListRequest.getCategory())

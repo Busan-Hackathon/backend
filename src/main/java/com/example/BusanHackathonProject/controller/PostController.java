@@ -1,6 +1,7 @@
 package com.example.BusanHackathonProject.controller;
 
 import com.example.BusanHackathonProject.domain.Post;
+import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
 import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.service.PostService;
@@ -35,8 +36,8 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String getPostDetail(@PathVariable Long id, Model model){
-        Post post = postService.deatilPost(id);
-        model.addAttribute("post", post);
+        PostDetailDto post = postService.detailPost(id);
+        model.addAttribute("postDetail", post);
         return "postDetail";
     }
 
