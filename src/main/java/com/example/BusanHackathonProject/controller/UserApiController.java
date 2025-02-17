@@ -1,10 +1,12 @@
 package com.example.BusanHackathonProject.controller;
 
 import com.example.BusanHackathonProject.dto.AddUserRequest;
+import com.example.BusanHackathonProject.dto.MainDto;
 import com.example.BusanHackathonProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,9 @@ public class UserApiController {
         return "redirect:/login";
     }
     @GetMapping("/home")
-    public String mainPage(){
+    public String mainPage(Model model){
+        MainDto mainDto = userService.mainPage();
+        model.addAttribute("homepage", mainDto);
         log.info("메인페이지 이동!!");
         return "home";
     }
