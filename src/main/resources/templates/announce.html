@@ -8,8 +8,9 @@
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
 <!-- 공지사항 타이틀 -->
-<div class="notice-header">
+<div class="text-center" >
     <h1>공지사항</h1>
 </div>
 
@@ -51,7 +52,7 @@
     </div>
 
     <!-- ✅ 게시물 작성 버튼 -->
-    <a href="/post/" class="btn btn-primary btn-write mt-3">게시물 작성</a>
+    <a href="/post" class="btn btn-primary btn-write mt-3">게시물 작성</a>
 </div>
 
 </body>
