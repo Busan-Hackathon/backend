@@ -55,14 +55,14 @@
     <div class="d-flex align-items-center justify-content-center vh-100">
       <div class="login-container text-center">
         <h4 class="mb-3">로그인</h4>
-        <form>
+        <form th:action="@{/login}" method="post">
           <div class="mb-3 text-start">
-            <label for="phoneNumber" class="form-label">전화번호</label>
-            <input type="text" class="form-control" id="phoneNumber" placeholder="010-XXXX-XXXX">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com">
           </div>
           <div class="mb-3 text-start">
             <label for="password" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="password" placeholder="********">
+            <input type="password" class="form-control" id="password" name="password" placeholder="********">
           </div>
           <button type="submit" class="btn btn-dark w-100">로그인</button>
         </form>
