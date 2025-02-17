@@ -5,7 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-application.yml
+# Spring Boot 정적 및 템플릿 파일 제외
+src/main/resources/example
+
+
 ### STS ###
 .apt_generated
 .classpath
