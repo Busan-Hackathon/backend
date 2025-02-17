@@ -6,10 +6,8 @@ import com.example.BusanHackathonProject.domain.User;
 import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
 import com.example.BusanHackathonProject.dto.postDto.PostListDto;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
-import com.example.BusanHackathonProject.dto.rankingDto.CompanyRankingDto;
+import com.example.BusanHackathonProject.dto.rankingDto.PointRankingDto;
 import com.example.BusanHackathonProject.dto.rankingDto.RankingDto;
-import com.example.BusanHackathonProject.dto.rankingDto.ServiceRankingDto;
-import com.example.BusanHackathonProject.dto.rankingDto.UserRankingDto;
 import com.example.BusanHackathonProject.repository.PostRepository;
 import com.example.BusanHackathonProject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,39 +52,57 @@ public class PostService {
 
 
     }
-    public RankingDto rankingList(){
 
-        List<CompanyRankingDto> companyRankingList = userRepository.findByRole("COMPANY")
-                .stream()
-                .sorted(Comparator.comparing(User::getDonationMoney).reversed()) // 🔥 후원 금액 기준 내림차순 정렬
-                .map(user -> CompanyRankingDto.builder()  // 🔥 User -> CompanyRankingDto 변환
-                        .companyName(user.getName()) // ✅ User의 name을 companyName으로 매핑
-                        .donationMoney(user.getDonationMoney()) // ✅ 후원 금액 매핑
-                        .build())
-                .collect(Collectors.toList());
-        List<UserRankingDto> userRankingList = userRepository.findByRole("USER")
-                .stream()
-                .sorted(Comparator.comparing(User::getDonationMoney).reversed())
-                .map(user -> UserRankingDto.builder()
-                        .userName(user.getName())
-                        .donationMoney(user.getDonationMoney())
-                        .build())
-                .collect(Collectors.toList());
-        List<ServiceRankingDto> serviceRankingList = userRepository.findByRole("USER")
-                .stream()
-                .sorted(Comparator.comparing(User::getDonationTime).reversed())
-                .map(user -> ServiceRankingDto.builder()
-                        .userName(user.getName())
-                        .serviceTime(user.getDonationTime())
-                        .build())
-                .collect(Collectors.toList());
+    public RankingDto rankingList() {
+        // 🔥 1. 모든 유저를 포인트 기준으로 내림차순 정렬
+        List<User> users = userRepository.findAll().stream()
+                .sorted(Comparator.comparing(User::getPoint).reversed())
+                .toList();
 
+        int totalUsers = users.size();
+        Long ra = 1L;
+        // 🔥 2. 순위별 리스트 생성
+        List<PointRankingDto> pointRankingDto1to30 = (totalUsers >= 1)
+                ? users.stream().limit(30)
+                .map((user) -> new PointRankingDto(user.getId(), user.getUsername(), user.getPoint()))
+                .collect(Collectors.toList())
+                : List.of();
+
+        List<PointRankingDto> pointRankingDto31to60 = (totalUsers >= 31)
+                ? users.stream().skip(30).limit(30)
+                .map((user) -> new PointRankingDto(user.getId(), user.getUsername(), user.getPoint()))
+                .collect(Collectors.toList())
+                : List.of();
+
+        List<PointRankingDto> pointRankingDto61to90 = (totalUsers >= 61)
+                ? users.stream().skip(60).limit(30)
+                .map((user) -> new PointRankingDto(user.getId(), user.getUsername(), user.getPoint()))
+                .collect(Collectors.toList())
+                : List.of();
+        for(PointRankingDto p  : pointRankingDto1to30)
+        {
+            p.setRanking(ra++);
+        }
+        if(totalUsers >= 31){
+            for(PointRankingDto p  : pointRankingDto31to60)
+            {
+                p.setRanking(ra++);
+            }
+        }
+        if(totalUsers >= 61){
+            for(PointRankingDto p : pointRankingDto61to90){
+                p.setRanking(ra++);
+            }
+        }
+
+        // 🔥 3. RankingDto에 저장하여 반환
         return RankingDto.builder()
-                .companyRankingList(companyRankingList)
-                .userRankingList(userRankingList)
-                .serviceRankingList(serviceRankingList)
+                .ranking1to30(pointRankingDto1to30)
+                .ranking31to60(pointRankingDto31to60)
+                .ranking61to90(pointRankingDto61to90)
                 .build();
     }
+
     public List<PostListDto> postListDonation( ){
         List<Post> posts = postRepository.findByCategory(Category.donation)
                 .orElseThrow(() -> new RuntimeException("해당 카테고리에 대한 게시글이 없습니다."));

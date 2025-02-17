@@ -41,21 +41,15 @@ public class User extends BaseEntity implements UserDetails {
     // ✅ 기본값 "USER" 설정
 
     @Column(nullable = false)
-    private Integer donationMoney = 0;
-
-    @Column(nullable = false)
-    private Integer donationTime = 0;
+    private Integer point;
 
     @Column(nullable = false)
     private String role = "USER";
 
     @PrePersist
     public void prePersist() {
-        if (donationMoney == null) {
-            donationMoney = 0;
-        }
-        if (donationTime == null) {
-            donationTime = 0;
+        if (point == null) {
+            point = 0;
         }
     }
     /**

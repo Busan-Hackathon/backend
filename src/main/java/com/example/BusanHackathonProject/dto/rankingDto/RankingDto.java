@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Builder
 public class RankingDto {
-    List<CompanyRankingDto> companyRankingList;
-    List<UserRankingDto> userRankingList;
-    List<ServiceRankingDto> serviceRankingList;
+    List<PointRankingDto> ranking1to30;
+    List<PointRankingDto> ranking31to60;
+    List<PointRankingDto> ranking61to90;
 }

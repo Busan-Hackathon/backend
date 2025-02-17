@@ -52,7 +52,7 @@ public class PostController {
     @GetMapping("/ranking")
     public String getRankingList(@ModelAttribute PostListRequest postListRequest, Model model){
         RankingDto postList = postService.rankingList();
-        model.addAttribute("companyRankingList", postList);
+        model.addAttribute("pointRanking", postList);
         return "rankingList";
     }
     @GetMapping("/donation")
