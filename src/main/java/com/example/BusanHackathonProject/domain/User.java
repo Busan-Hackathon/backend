@@ -42,12 +42,22 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(nullable = false)
     private Integer donationMoney = 0;
+
     @Column(nullable = false)
     private Integer donationTime = 0;
 
     @Column(nullable = false)
     private String role = "USER";
 
+    @PrePersist
+    public void prePersist() {
+        if (donationMoney == null) {
+            donationMoney = 0;
+        }
+        if (donationTime == null) {
+            donationTime = 0;
+        }
+    }
     /**
      * Spring Security에서 권한 정보 반환
      * 예: "ROLE_USER", "ROLE_ADMIN"

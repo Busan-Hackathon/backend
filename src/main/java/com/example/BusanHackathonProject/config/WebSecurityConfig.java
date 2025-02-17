@@ -42,7 +42,7 @@ public class WebSecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")  // 🔥 이메일을 username으로 사용
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home") // 🔥 이전 페이지로 이동 가능 (true 제거)
+                        .defaultSuccessUrl("/home",true) // 🔥 이전 페이지로 이동 가능 (true 제거)
                         .permitAll()
                 )
                 .logout(logout -> logout
