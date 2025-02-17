@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,25 +53,6 @@
             padding: 5px 10px;
             border-radius: 15px;
         }
-        .btn-write {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            text-align: center;
-            font-size: 18px;
-        }
-        .filter-search {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .filter-search select {
-            width: 150px;
-        }
-        .filter-search .input-group {
-            width: 250px;
-        }
     </style>
 </head>
 <body>
@@ -82,20 +63,6 @@
 </div>
 
 <div class="container">
-    <!-- 검색 및 필터 -->
-    <div class="filter-search">
-        <select class="form-select">
-            <option selected>전체</option>
-            <option>공지</option>
-            <option>이벤트</option>
-            <option>모집</option>
-        </select>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="검색">
-            <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
-        </div>
-    </div>
-
     <!-- 공지사항 리스트 -->
     <div class="notice-table">
         <table>
@@ -106,54 +73,21 @@
                     <th style="width: 15%;">날짜</th>
                 </tr>
             </thead>
-          <tbody id="postList">
-                <tr>
-                    <td><span class="category-badge">공지</span></td>
-                    <td><a href="postDetail.html" class="clickable">2024년 기부금품 모집결과 보고(Doti & Beni 인터내셔널)</a></td>
-                    <td>2025.01.22</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">공지</span></td>
-                    <td>2024년 기부금품 모집결과 보고(Doti & Beni)</td>
-                    <td>2025.01.22</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">이벤트</span></td>
-                    <td>희망 나눔 마라톤 참가 안내</td>
-                    <td>2024.12.02</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">모집</span></td>
-                    <td>아동권리 번역지원봉사자 모집</td>
-                    <td>2024.12.16</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">공지</span></td>
-                    <td>굿네이버스 자립지원형 성공육성 캠프 개최 안내</td>
-                    <td>2024.12.06</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">모집</span></td>
-                    <td>KOICA-NGO 봉사단 모집</td>
-                    <td>2024.12.11</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">일반</span></td>
-                    <td>설 연휴 출금일 변경 안내</td>
-                    <td>2025.01.15</td>
-                </tr>
-                <tr>
-                    <td><span class="category-badge">공지</span></td>
-                    <td>2025 상반기 영프론티어봉사단(YP) 채용 공고</td>
-                    <td>2024.12.09</td>
+            <tbody>
+                <tr th:each="post : ${postList}">
+                    <td><span class="category-badge" th:text="${post.category}">공지</span></td>
+                    <td>
+                        <a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}">게시글 제목</a>
+                    </td>
+                    <td th:text="${post.date}">2025.01.22</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <!-- ✅ 게시물 작성 버튼 (모달 오픈) -->
-    <button class="btn btn-primary btn-write" data-bs-toggle="modal" data-bs-target="#writeModal">게시물 작성</button>
 </div>
+
+<!-- ✅ 게시물 작성 버튼 (모달 오픈) -->
+<button class="btn btn-primary btn-write" data-bs-toggle="modal" data-bs-target="#writeModal">게시물 작성</button>
 
 <!-- ✅ 게시물 작성 모달 -->
 <div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="writeModalLabel" aria-hidden="true">
@@ -212,19 +146,8 @@
         })
         .then(response => response.json())
         .then(data => {
-            alert("관리자의 검토 후 게시물이 게시됩니다.");
-            document.getElementById("postForm").reset();
-            let writeModal = bootstrap.Modal.getInstance(document.getElementById("writeModal"));
-            writeModal.hide();
-
-            // 새 게시물을 목록에 추가
-            let newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><span class="category-badge">${category}</span></td>
-                <td>${title}</td>
-                <td>${new Date().toISOString().split("T")[0]}</td>
-            `;
-            document.getElementById("postList").appendChild(newRow);
+            alert("게시물이 성공적으로 추가되었습니다.");
+            location.reload();  // 새로고침하여 게시물 업데이트
         })
         .catch(error => console.error("Error:", error));
     });
