@@ -26,12 +26,18 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public Post savePost(PostRequest postRequest){
+    public Post savePost(PostRequest postRequest, User user){
         Post post = Post.builder()
                 .title(postRequest.getTitle())
                 .content(postRequest.getContent())
-                .targetMoney(postRequest.getTargetMoney())
-                .currentMoney(0).build();
+                .category(Category.donation)
+                .author(user)
+                .build();
+
+        if(postRequest.equals("donation"))
+            post.setCategory(Category.donation);
+        if(postRequest.equals("announcement"))
+            post.setCategory(Category.announcement);
         postRepository.save(post);
         return post;
     }
@@ -41,8 +47,6 @@ public class PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .author(post.getAuthor().getName())
-                .targetMoney(post.getTargetMoney())
-                .currentMoney(post.getCurrentMoney())
                 .build();
 
 

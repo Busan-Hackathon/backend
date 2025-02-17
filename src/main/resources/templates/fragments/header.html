@@ -11,15 +11,15 @@
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><a th:href="@{/home}" class="nav-link px-2">메인</a></li>
                     <li><a th:href="@{/post/ranking}" class="nav-link px-2">포인트 순위</a></li>
-<!--                    <li><a th:href="@{/post/usehistory}" class="nav-link px-2">후원금 사용내역</a></li>-->
                     <li><a th:href="@{/post/donation}" class="nav-link px-2">후원하기</a></li>
-<!--                    <li><a th:href="@{/post/service}" class="nav-link px-2">봉사하기</a></li>-->
-<!--                    <li><a th:href="@{/post/event}" class="nav-link px-2">이벤트</a></li>-->
                     <li><a th:href="@{/post/announce}" class="nav-link px-2">공지사항</a></li>
                 </ul>
                 <div class="col-md-3 text-end">
-                    <form th:action="@{/post/create}" method="get" style="display: inline;">
-                        <button type="submit" class="btn btn-outline-primary me-2">게시물 등록하기</button>
+                    <!-- 🔥 게시물 등록 모달 버튼 -->
+                    <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#postModal">
+                        게시물 등록하기
+                    </button>
+
                     <form th:action="@{/login}" method="get" style="display: inline;">
                         <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
                     </form>
@@ -30,4 +30,69 @@
             </header>
         </div>
     </div>
+
+    <!-- 🔥 게시물 등록 모달 -->
+    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel">게시물 등록</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 게시물 입력 폼 -->
+                    <form id="postForm">
+                        <div class="mb-3">
+                            <label for="category" class="form-label">카테고리</label>
+                            <select class="form-control" id="category" name="category" required>
+                                <option value="donation">후원하기</option>
+                                <option value="announcement">공지사항</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">제목</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">내용</label>
+                            <textarea class="form-control" id="content" name="content" required></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="submitPost()">등록</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 및 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function submitPost() {
+            const category = document.getElementById("category").value;
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+
+            if (!category || !title || !content) {
+                alert("카테고리, 제목, 내용을 입력해주세요.");
+                return;
+            }
+
+            // 서버로 데이터 전송 (AJAX)
+            fetch("/post/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ category: category, title: title, content: content })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("게시물이 등록되었습니다.");
+                        location.reload(); // 페이지 새로고침
+                    } else {
+                        alert("게시물 등록 실패!");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
 </header>

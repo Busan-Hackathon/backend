@@ -2,22 +2,16 @@ package com.example.BusanHackathonProject.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "posts") // SQL 예약어 충돌 방지를 위해 "users" 추천
+@Table(name = "posts")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Post extends BaseEntity{
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,23 +21,14 @@ public class Post extends BaseEntity{
     private String title;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User author;
 
     @Column(nullable = false)
     private String content;
-
-    @Column(nullable = true)
-    private Integer targetMoney;
-
-    @Column(nullable = true)
-    private Integer currentMoney;
-
-
-
-
 
 }

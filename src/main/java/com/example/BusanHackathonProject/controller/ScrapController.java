@@ -25,7 +25,7 @@ public class ScrapController {
 
     @PostMapping("/scrap/{postId}")
     public String addScrap(@PathVariable Long postId, @AuthenticationPrincipal UserDetails userDetails, Model model){
-        User user =userService.findUser(userDetails.getUsername());
+        User user = userService.findUser(userDetails.getUsername());
         scrapService.addScrap(user.getId(), postId);
         return "redirect:/post/" + postId;
     }

@@ -1,12 +1,18 @@
 package com.example.BusanHackathonProject.controller;
 
 import com.example.BusanHackathonProject.domain.Post;
+import com.example.BusanHackathonProject.domain.User;
 import com.example.BusanHackathonProject.dto.postDto.PostDetailDto;
 import com.example.BusanHackathonProject.dto.postDto.PostListRequest;
 import com.example.BusanHackathonProject.dto.postDto.PostRequest;
 import com.example.BusanHackathonProject.dto.rankingDto.RankingDto;
 import com.example.BusanHackathonProject.service.PostService;
+import com.example.BusanHackathonProject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,21 +23,23 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/post")
+@Slf4j
 public class PostController {
 
     private final PostService postService;
-
+    private final UserService userService;
     @GetMapping("/")
     public String showForm(Model model){
+
         model.addAttribute("PostRequest", new Post());
         return "postForm";
     }
 
     @PostMapping("/create")
-    public String createPost(@ModelAttribute PostRequest postRequest, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return "postForm";
-        Post savedPost = postService.savePost(postRequest);
+    public String createPost(@RequestBody PostRequest postRequest, @AuthenticationPrincipal UserDetails userDetails){
+        log.info("등록완료!!");
+        User user = userService.findUser(userDetails.getUsername());
+        Post savedPost = postService.savePost(postRequest, user);
         return "redirect:/posts/" + savedPost.getId();
     }
 
