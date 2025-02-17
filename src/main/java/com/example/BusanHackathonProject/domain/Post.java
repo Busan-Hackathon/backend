@@ -29,10 +29,7 @@ public class Post extends BaseEntity{
     private String content;
 
     @Column(nullable = false)
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "money_id")
-    private Money donationMoney;
+    private int donationMoney;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "money_id")
