@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
             background-color: #f8f9fa;
         }
         .notice-header {
-            background-image: url("[[${@environment.getProperty('image.path')}/bridge.jpg]]");
+            background-image: url("[[@{/images/bridge.jpg}]]");
             background-size: cover;
             background-position: center;
             height: 250px;
@@ -76,36 +76,6 @@
 </head>
 <body>
 
-<!-- ✅ 헤더 (Thymeleaf 적용) -->
-<div style="background-color: #e3f2fd;">
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0">
-                <a th:href="@{/}" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img th:src="@{/images/Logo.png}" style="height: 4rem;">
-                </a>
-            </div>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a th:href="@{/home}" class="nav-link px-2">메인</a></li>
-                <li><a th:href="@{/ranking}" class="nav-link px-2">후원 및 봉사 순위</a></li>
-                <li><a th:href="@{/usehistory}" class="nav-link px-2">후원금 사용내역</a></li>
-                <li><a th:href="@{/patronage}" class="nav-link px-2 link-secondary">후원하기</a></li>
-                <li><a th:href="@{/service}" class="nav-link px-2">봉사하기</a></li>
-                <li><a th:href="@{/event}" class="nav-link px-2">이벤트</a></li>
-                <li><a th:href="@{/announcement}" class="nav-link px-2">공지사항</a></li>
-            </ul>
-            <div class="col-md-3 text-end">
-                <form th:action="@{/login}" method="get" style="display: inline;">
-                    <button type="submit" class="btn btn-outline-primary me-2">로그인</button>
-                </form>
-                <form th:action="@{/signup}" method="get" style="display: inline;">
-                    <button type="submit" class="btn btn-primary">회원가입</button>
-                </form>
-            </div>
-        </header>
-    </div>
-</div>
-
 <!-- 배경 이미지 및 공지사항 타이틀 -->
 <div class="notice-header">
     공지사항
@@ -137,10 +107,10 @@
                 </tr>
             </thead>
             <tbody id="postList">
-                <tr th:each="post : ${posts}">
-                    <td><span class="category-badge" th:text="${post.category}"></span></td>
-                    <td><a th:href="@{/postDetail/{id}(id=${post.id})}" th:text="${post.title}" class="clickable"></a></td>
-                    <td th:text="${post.date}"></td>
+                <tr>
+                    <td><span class="category-badge">공지</span></td>
+                    <td><a href="postDetail.html" class="clickable">2024년 기부금품 모집결과 보고(사단법인 굿네이버스 인터내셔널)</a></td>
+                    <td>2025.01.22</td>
                 </tr>
             </tbody>
         </table>
@@ -184,24 +154,45 @@
     </div>
 </div>
 
-<!-- ✅ 게시물 작성 요청 -->
 <script>
-document.getElementById("postForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+    document.getElementById("postForm").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    let title = document.getElementById("postTitle").value;
-    let category = document.getElementById("postCategory").value;
-    let content = document.getElementById("postContent").value;
+        let title = document.getElementById("postTitle").value;
+        let category = document.getElementById("postCategory").value;
+        let content = document.getElementById("postContent").value;
 
-    fetch("http://localhost:8080/post", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, category, content })
-    }).then(() => {
-        alert("관리자의 검토 후 게시물이 게시됩니다.");
-        location.reload();
-    }).catch(error => console.error("Error:", error));
-});
+        let postData = {
+            title: title,
+            category: category,
+            content: content
+        };
+
+        fetch("http://localhost:8080/post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(postData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("관리자의 검토 후 게시물이 게시됩니다.");
+            document.getElementById("postForm").reset();
+            let writeModal = bootstrap.Modal.getInstance(document.getElementById("writeModal"));
+            writeModal.hide();
+
+            // 새 게시물을 목록에 추가
+            let newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><span class="category-badge">${category}</span></td>
+                <td>${title}</td>
+                <td>${new Date().toISOString().split("T")[0]}</td>
+            `;
+            document.getElementById("postList").appendChild(newRow);
+        })
+        .catch(error => console.error("Error:", error));
+    });
 </script>
 
 </body>
