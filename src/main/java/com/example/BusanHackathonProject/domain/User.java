@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class) // ✅ Spring Data JPA의 Auditing 활성화
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,15 +34,6 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
-
-    // ✅ 자동 생성 날짜 (INSERT 시)
-    @CreatedDate
-    @Column(updatable = false) // 생성일은 수정되지 않도록 설정
-    private LocalDateTime createdAt;
-
-    // ✅ 자동 수정 날짜 (UPDATE 시)
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
     // ✅ 기본값 "USER" 설정
     @Column(nullable = false)
