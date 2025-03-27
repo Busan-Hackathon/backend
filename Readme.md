@@ -1,3 +1,6 @@
+# 페이지 소개
+https://github.com/Busan-Hackathon
+
 # 프론트엔드 개발 사항
 
 - 정적 리소스 (static 파일에)
